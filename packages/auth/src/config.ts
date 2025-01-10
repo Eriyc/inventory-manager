@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type {
   DefaultSession,
   NextAuthConfig,
@@ -8,7 +9,16 @@ import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import Discord from "next-auth/providers/discord";
 
 import { db } from "@acme/db/client";
-import { Account, Session, User } from "@acme/db/schema";
+
+import "@acme/db/schema";
+
+import {
+  accounts,
+  authenticators,
+  sessions,
+  users,
+  verificationTokens,
+} from "@acme/db/schema";
 
 import { env } from "../env";
 
@@ -21,9 +31,11 @@ declare module "next-auth" {
 }
 
 const adapter = DrizzleAdapter(db, {
-  usersTable: User,
-  accountsTable: Account,
-  sessionsTable: Session,
+  usersTable: users,
+  accountsTable: accounts,
+  sessionsTable: sessions,
+  authenticatorsTable: authenticators,
+  verificationTokensTable: verificationTokens,
 });
 
 export const isSecureContext = env.NODE_ENV !== "development";
