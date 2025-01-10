@@ -41,6 +41,8 @@ const adapter = DrizzleAdapter(db, {
 export const isSecureContext = env.NODE_ENV !== "development";
 
 export const authConfig = {
+  redirectProxyUrl: env.AUTH_REDIRECT_PROXY_URL,
+
   adapter,
   // In development, we need to skip checks to allow Expo to work
   ...(!isSecureContext

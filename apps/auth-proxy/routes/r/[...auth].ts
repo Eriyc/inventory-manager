@@ -8,7 +8,7 @@ export default eventHandler(async (event) =>
     secret: process.env.AUTH_SECRET,
     trustHost: !!process.env.VERCEL,
     redirectProxyUrl: process.env.AUTH_REDIRECT_PROXY_URL,
-    
+
     providers: [
       Discord({
         clientId: process.env.AUTH_DISCORD_ID,
